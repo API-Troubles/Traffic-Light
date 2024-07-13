@@ -1,29 +1,34 @@
-//Phase 1 lights and buttons
+//Phase 1 lights, buttons, sensors
 #define RED1 4
 #define YELLOW1 3
 #define GREEN1 2
-#define SENSOR1 10
+#define PED1 10
 #define OUT1 9
+#define SENSOR1 A1
 
-//Phase 2 lights and buttons
+//Phase 2 lights, buttons, sensors
 #define RED2 5
 #define YELLOW2 6
 #define GREEN2 7
-#define SENSOR2 12
-#define OUT2 11
+#define PED2 13
+#define OUT2 12
+#define SENSOR2 A0
 
 //Traffic light timing
-#define RED_CLEAR 2000
-#define YELLOW_LENGTH 2000
-#define GREEN_MIN_LENGTH 5000
+const int RED_CLEAR = 2000;
+const int YELLOW_LENGTH = 2000;
+const int GREEN_MIN_LENGTH = 5000;
 
-int phase_1 = 0;
-int phase_2 = 0;
+//Ultrasonic distance sensor vars
+int distance_1 = 0;
+int distance_2 = 0;
 
+//Pedestrian buttons
 boolean sensor_1 = LOW;
 boolean sensor_2 = LOW;
 
-long readUltrasonicDistance(int triggerPin, int echoPin)
+
+long readUtrasonicDistance(int triggerPin, int echoPin)
 {
   pinMode(triggerPin, OUTPUT);
   digitalWrite(triggerPin, LOW);
@@ -37,21 +42,22 @@ long readUltrasonicDistance(int triggerPin, int echoPin)
 
 void setup() {
   Serial.begin(9600);
+  
   pinMode(RED1, OUTPUT);
   pinMode(YELLOW1, OUTPUT);
   pinMode(GREEN1, OUTPUT);
-  pinMode(SENSOR1, INPUT);
+  pinMode(PED1, INPUT);
   pinMode(OUT1, OUTPUT);
 
   pinMode(RED2, OUTPUT);
   pinMode(YELLOW2, OUTPUT);
   pinMode(GREEN2, OUTPUT);
-  pinMode(SENSOR2, INPUT);
+  pinMode(PED2, INPUT);
   pinMode(OUT2, OUTPUT);
 
-  digitalWrite(RED2, HIGH);
   digitalWrite(RED1, HIGH);
-  delay(1000); // Delay on start to fix bug
+  digitalWrite(RED2, HIGH);
+  delay(1000); // FUGFIX: Micro:bit pedestrian display broken w/o delay
 }
 
 
@@ -65,17 +71,19 @@ void loop() {
   
   // Wait until call to change phase
   delay(GREEN_MIN_LENGTH);
-  sensor_2 = digitalRead(SENSOR2);
-  while (sensor_2 == LOW) {
-    sensor_2 = digitalRead(SENSOR2);
+  sensor_2 = digitalRead(PED2);
+  //distance_2 = readUltrasonicDistance(SENSOR2, SENSOR2);
+  
+  while (sensor_2 == LOW) {//distance_2 > 50) {
+    sensor_2 = digitalRead(PED2);
   }
   digitalWrite(OUT1, LOW); 
   // BUGFIX: Wait until our ped timer over
   // micro:bit timer is delayed?
-  delay(5000); // Give the micro:bit a change to reset its call
-  sensor_1 = digitalRead(SENSOR1);
+  delay(5000); // Give the micro:bit a chance to reset its call
+  sensor_1 = digitalRead(PED1);
   while (sensor_1 == LOW) {
-    sensor_1 = digitalRead(SENSOR1);
+    sensor_1 = digitalRead(PED1);
   }
 
   // Phase 1 green to YELLOW
@@ -98,17 +106,17 @@ void loop() {
   
   // Wait untill call to change phase
   delay(GREEN_MIN_LENGTH);
-  sensor_1 = digitalRead(SENSOR1);
+  sensor_1 = digitalRead(PED1);
   while (sensor_1 == LOW) {
-    sensor_1 = digitalRead(SENSOR1);
+    sensor_1 = digitalRead(PED1);
   }
   digitalWrite(OUT2, LOW); 
   // BUGFIX: Wait until ped timer over
   // micro:bit timer is delayed?
-  delay(5000); // Give the micro:bit a change to reset its call
-  sensor_2 = digitalRead(SENSOR2);
+  delay(5000); // Give the micro:bit a chance to reset its call
+  sensor_2 = digitalRead(PED2);
   while (sensor_2 == LOW) {
-    sensor_2 = digitalRead(SENSOR2);
+    sensor_2 = digitalRead(PED2);
   }
 
   // Phase 2 green to YELLOW
@@ -122,4 +130,3 @@ void loop() {
   delay(RED_CLEAR); // Clear phase
   Serial.println("CLEAR 2");
 }
-

@@ -1,6 +1,3 @@
-# The aurduino code
-# Kind of non-functional so far
-
 //Phase 1 lights and buttons
 #define RED1 4
 #define YELLOW1 3
@@ -64,17 +61,24 @@ void loop() {
   digitalWrite(OUT1, HIGH);
   digitalWrite(RED1, LOW);
   digitalWrite(GREEN1, HIGH);
+  Serial.println("phase 2 GREEN");
+  
+  // Wait until call to change phase
   delay(GREEN_MIN_LENGTH);
   sensor_2 = digitalRead(SENSOR2);
   while (sensor_2 == LOW) {
     sensor_2 = digitalRead(SENSOR2);
   }
-  digitalWrite(OUT2, LOW);
-  delay(9000);
-  Serial.println("phase 2 GREEN");
+  digitalWrite(OUT1, LOW); 
+  // BUGFIX: Wait until our ped timer over
+  // micro:bit timer is delayed?
+  delay(5000); // Give the micro:bit a change to reset its call
+  sensor_1 = digitalRead(SENSOR1);
+  while (sensor_1 == LOW) {
+    sensor_1 = digitalRead(SENSOR1);
+  }
 
   // Phase 1 green to YELLOW
-  digitalWrite(OUT1, LOW);
   digitalWrite(GREEN1, LOW);
   digitalWrite(YELLOW1, HIGH);
   Serial.println("Phase 1 YELLOW");
@@ -90,14 +94,22 @@ void loop() {
   digitalWrite(OUT2, HIGH);
   digitalWrite(RED2, LOW);
   digitalWrite(GREEN2, HIGH);
+  Serial.println("phase 1 GREEN");
+  
+  // Wait untill call to change phase
   delay(GREEN_MIN_LENGTH);
   sensor_1 = digitalRead(SENSOR1);
   while (sensor_1 == LOW) {
     sensor_1 = digitalRead(SENSOR1);
   }
-  digitalWrite(OUT1, LOW);
-  delay(9000);
-  Serial.println("phase 1 GREEN");
+  digitalWrite(OUT2, LOW); 
+  // BUGFIX: Wait until ped timer over
+  // micro:bit timer is delayed?
+  delay(5000); // Give the micro:bit a change to reset its call
+  sensor_2 = digitalRead(SENSOR2);
+  while (sensor_2 == LOW) {
+    sensor_2 = digitalRead(SENSOR2);
+  }
 
   // Phase 2 green to YELLOW
   digitalWrite(GREEN2, LOW);
@@ -110,3 +122,4 @@ void loop() {
   delay(RED_CLEAR); // Clear phase
   Serial.println("CLEAR 2");
 }
+

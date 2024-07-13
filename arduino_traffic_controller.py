@@ -70,7 +70,7 @@ void loop() {
     sensor_2 = digitalRead(SENSOR2);
   }
   digitalWrite(OUT2, LOW);
-  delay(9);
+  delay(9000);
   Serial.println("phase 2 GREEN");
 
   // Phase 1 green to YELLOW
@@ -96,7 +96,7 @@ void loop() {
     sensor_1 = digitalRead(SENSOR1);
   }
   digitalWrite(OUT1, LOW);
-  delay(9);
+  delay(9000);
   Serial.println("phase 1 GREEN");
 
   // Phase 2 green to YELLOW

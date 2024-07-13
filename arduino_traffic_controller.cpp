@@ -2,9 +2,9 @@
 #define RED1 4
 #define YELLOW1 3
 #define GREEN1 2
-#define PED1 10
-#define OUT1 9
-#define SENSOR1 8
+#define PED1 9
+#define OUT1 8
+#define SENSOR1 A1
 
 //Phase 2 lights, buttons, sensors
 #define RED2 5
@@ -12,14 +12,14 @@
 #define GREEN2 7
 #define PED2 13
 #define OUT2 12
-#define SENSOR2 11
+#define SENSOR2 A0
 
 //Traffic light timing
 const int RED_CLEAR = 2000;
 const int YELLOW_LENGTH = 2000;
 const int GREEN_MIN_LENGTH = 5000;
 
-//Ultrasonic distance sensor vars
+//Ultrasonic distance sensors
 int distance_1 = 0;
 int distance_2 = 0;
 
@@ -27,7 +27,11 @@ int distance_2 = 0;
 boolean sensor_1 = LOW;
 boolean sensor_2 = LOW;
 
+//Send data to the other controller for the pedrestrian lights
+#define SENDPHASE 11
 
+// This reads from the distance sensors
+// Credit: Arduino, Public domain
 long readUtrasonicDistance(int pingPin) {
   pinMode(pingPin, OUTPUT);
   digitalWrite(pingPin, LOW);
@@ -40,8 +44,12 @@ long readUtrasonicDistance(int pingPin) {
   return 0.01723 * pulseIn(pingPin, HIGH);
 }
 
+
+// Setup ofc
 void setup() {
   Serial.begin(9600);
+  
+  pinMode(SENDPHASE, OUTPUT);
   
   pinMode(RED1, OUTPUT);
   pinMode(YELLOW1, OUTPUT);
@@ -57,16 +65,20 @@ void setup() {
 
   digitalWrite(RED1, HIGH);
   digitalWrite(RED2, HIGH);
+  
+  digitalWrite(SENDPHASE, LOW);
   delay(1000); // FUGFIX: Micro:bit pedestrian display broken w/o delay
 }
 
 
+// START DA TRAFFIC CHAOS!!!!
 void loop() {
   // Phase 1 GREEN
   // Phase 2 RED
   digitalWrite(OUT1, HIGH);
   digitalWrite(RED1, LOW);
   digitalWrite(GREEN1, HIGH);
+  digitalWrite(SENDPHASE, HIGH);
   Serial.println("phase 2 GREEN");
   
   // Wait until call to change phase
@@ -77,7 +89,7 @@ void loop() {
   while (sensor_2 == LOW && distance_2 > 50) {
     sensor_2 = digitalRead(PED2);
     distance_2 = readUtrasonicDistance(SENSOR2);
-  }
+  } 
   digitalWrite(OUT1, LOW); 
   // BUGFIX: Wait until our ped timer over
   // micro:bit timer is delayed?
@@ -103,6 +115,7 @@ void loop() {
   digitalWrite(OUT2, HIGH);
   digitalWrite(RED2, LOW);
   digitalWrite(GREEN2, HIGH);
+  digitalWrite(SENDPHASE, LOW);
   Serial.println("phase 1 GREEN");
   
   // Wait untill call to change phase
@@ -114,7 +127,7 @@ void loop() {
     sensor_1 = digitalRead(PED1);
     distance_1 = readUtrasonicDistance(SENSOR1);
   }
-  digitalWrite(OUT2, LOW); 
+  digitalWrite(OUT2, LOW);
   // BUGFIX: Wait until ped timer over
   // micro:bit timer is delayed?
   delay(5000); // Give the micro:bit a chance to reset its call

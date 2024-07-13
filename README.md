@@ -1,10 +1,29 @@
-# Traffic Light
-A semi-realistic traffic light created in TinkerCAD with Arduinos and micro:bits
+# Semi-Realistic TinkerCAD Traffic Light Circuit
+A semi-realistic traffic light circuit was created in TinkerCAD with Arduinos and micro:bits. This repo contains the source code for the project and was created for the purpose of tracking scraps and projects for a hackathon.
 
+**[Find the project here!](https://www.tinkercad.com/things/aTAbVHVReYn-realistic-ish-traffic-light?sharecode=yxpimFw48Sh7uL3CR5kw6gxLFxUi6zwyi1_lv7-vQRQ)**
 
-Created by Felix G for the Arcade hackathon. Work in progress.
+![image](https://github.com/user-attachments/assets/25972859-0ec8-443e-aff1-8ed65eef2c12)
 
-The link & some photos will be released when I'm finished. Source code for the Arduino and micro:bits go here.
+**[Find the project here!](https://www.tinkercad.com/things/aTAbVHVReYn-realistic-ish-traffic-light?sharecode=yxpimFw48Sh7uL3CR5kw6gxLFxUi6zwyi1_lv7-vQRQ)**
+
+## Features:
+- Fully functional traffic lights and phases
+- Pedestrian countdown timer and vehicle "detection"
+- Realistic** pedestrian locator tones and activation tone
+
+** Depending on where you live it may sound different lol
+
+## Why did I make this?
+This is a project for the summer hackathon Arcade. I chose to make this because, well, I'm a traffic nerd. It was an extremely fun ~~and painful to fix~~ project. I wanted to try out making circuits for basically the first time ever, and in the process realized fixing them is a huge pain. I also realized just how painfully hard it is to cater to people of all needs with accessibility features. That part alone took me a good nearly 2 hours.
+
+## Notes:
+- This is very, wait no, _EXTREMELY_ laggy, likely because there 2 micro:bits and 2 Arduinos lol
+- There are 2 phases, basically 2 directions of travel, left is phase 2, and right is phase 3, all stuff except the Arduinos in the middle are mirror copies
+- To activate the signal on your half, press A _or_ B on the micro:bit, _or_ move the distance sensor within 50 cm, then wait! The other side gets a countdown before their signal goes red and you get the green!
+- There's a buzzer on your half, it makes a lower-pitched beep to simulate a locator tone, used in real life by the blind to feel for the button, they find it by sound! Pressing it makes a higher-pitched beep, to show it worked. The sound may not play due to the lag, I spent like 10 minutes debugging it just to realize its lag lol. 
 
 ## Note for the reviewers at Arcade!
-TinkerCAD provides a virtual code editor and simulator, for which there is no git function. I have uploaded screenshots and videos in my sessions as scraps instead. I'll also be uploading by updated code as I go.
+TinkerCAD provides a virtual code editor and simulator, for which there is no git function. I have uploaded screenshots and videos in my sessions as scraps. I've uploaded my updated code as I went as more scraps.
+
+Here's the link again in case, https://www.tinkercad.com/things/aTAbVHVReYn-realistic-ish-traffic-light?sharecode=yxpimFw48Sh7uL3CR5kw6gxLFxUi6zwyi1_lv7-vQRQ

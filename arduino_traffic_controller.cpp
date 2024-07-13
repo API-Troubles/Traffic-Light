@@ -4,7 +4,7 @@
 #define GREEN1 2
 #define PED1 10
 #define OUT1 9
-#define SENSOR1 A1
+#define SENSOR1 8
 
 //Phase 2 lights, buttons, sensors
 #define RED2 5
@@ -12,7 +12,7 @@
 #define GREEN2 7
 #define PED2 13
 #define OUT2 12
-#define SENSOR2 A0
+#define SENSOR2 11
 
 //Traffic light timing
 const int RED_CLEAR = 2000;
@@ -28,16 +28,16 @@ boolean sensor_1 = LOW;
 boolean sensor_2 = LOW;
 
 
-long readUtrasonicDistance(int triggerPin, int echoPin)
-{
-  pinMode(triggerPin, OUTPUT);
-  digitalWrite(triggerPin, LOW);
+long readUtrasonicDistance(int pingPin) {
+  pinMode(pingPin, OUTPUT);
+  digitalWrite(pingPin, LOW);
   delayMicroseconds(2);
-  digitalWrite(triggerPin, HIGH);
-  delayMicroseconds(10);
-  digitalWrite(triggerPin, LOW);
-  pinMode(echoPin, INPUT);
-  return 0.01723 * pulseIn(echoPin, HIGH);
+  digitalWrite(pingPin, HIGH);
+  delayMicroseconds(5);
+  digitalWrite(pingPin, LOW);
+  
+  pinMode(pingPin, INPUT);
+  return 0.01723 * pulseIn(pingPin, HIGH);
 }
 
 void setup() {
@@ -72,10 +72,11 @@ void loop() {
   // Wait until call to change phase
   delay(GREEN_MIN_LENGTH);
   sensor_2 = digitalRead(PED2);
-  //distance_2 = readUltrasonicDistance(SENSOR2, SENSOR2);
+  distance_2 = readUtrasonicDistance(SENSOR2);
   
-  while (sensor_2 == LOW) {//distance_2 > 50) {
+  while (sensor_2 == LOW && distance_2 > 50) {
     sensor_2 = digitalRead(PED2);
+    distance_2 = readUtrasonicDistance(SENSOR2);
   }
   digitalWrite(OUT1, LOW); 
   // BUGFIX: Wait until our ped timer over
@@ -107,8 +108,11 @@ void loop() {
   // Wait untill call to change phase
   delay(GREEN_MIN_LENGTH);
   sensor_1 = digitalRead(PED1);
-  while (sensor_1 == LOW) {
+  distance_1 = readUtrasonicDistance(SENSOR1);
+  
+  while (sensor_1 == LOW && distance_1 > 50) {
     sensor_1 = digitalRead(PED1);
+    distance_1 = readUtrasonicDistance(SENSOR1);
   }
   digitalWrite(OUT2, LOW); 
   // BUGFIX: Wait until ped timer over

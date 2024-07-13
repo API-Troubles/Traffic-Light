@@ -1,6 +1,3 @@
-# Here is my micro:bit code so far
-# Updated manually
-
 TIMER = 0
 DISTANCE = 0
 RIGHT_WAY_FLAG = False
@@ -35,8 +32,8 @@ def on_pulsed_p2_low():
     for _ in range(9):
       basic.show_number(TIMER)
       TIMER += -1
-      basic.pause(900)
-      basic.show_string("")
+      basic.pause(600)       # Due to a weird timing bug this loop
+      basic.show_string("")  # intentionally DOESN't add to 1 second
       basic.pause(100)
     basic.show_icon(IconNames.No)
     pins.digital_write_pin(DigitalPin.P0, 1)

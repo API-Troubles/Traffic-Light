@@ -1,5 +1,3 @@
-// Code for Arduino located most uo
-
 // Why is this a separate controller?
 // I couldn't figure out how to loop this forever in the
 // "background" so the simplest solution is to run another board.
@@ -22,18 +20,22 @@ boolean call_adk = false; //Call by to say ped pushed button
 int unsigned quiet_timer = 0;
 int unsigned tone_timer = 0;
 
-void press_chirp_1() {
-  noTone(BUZZER1);
-  tone(BUZZER1, 1500);
+void chirp(int buzzer) {
+  noTone(buzzer);
+  tone(buzzer, 1500);
   delay(100);
-  noTone(BUZZER1);
+  noTone(buzzer);
 }
 
-void press_chirp_2() {
-  noTone(BUZZER2);
-  tone(BUZZER2, 1500);
-  delay(100);
-  noTone(BUZZER2);
+void loop_locator(int buzzer) {
+  tone(buzzer, 880);
+  
+  // How long the tone lasts
+  delay(60);
+  
+  // Repeat interval
+  noTone(buzzer);
+  delay(1000);
 }
 
 void setup(){
@@ -49,66 +51,19 @@ void setup(){
   }
 }
 
-
-void buzzer_phase_1() {
-  tone(BUZZER2, 880);
-  
-  // How long the tone lasts
-  while (tone_timer < 60) {
-    if (call_adk) {
-      press_chirp_2();
-    }
-    delay(10);
-    call_adk = digitalRead(ADK);
-    tone_timer += 10;
-  }
-  
-  // Repeat interval
-  noTone(BUZZER2);
-  while (quiet_timer < 1000) {
-    if (call_adk) {
-      press_chirp_2();
-    }
-    delay(10);
-    call_adk = digitalRead(ADK);
-    quiet_timer += 10;
-  }
-  tone_timer = 0;
-  quiet_timer = 0;
-}
-
-void buzzer_phase_2() {
-  tone(BUZZER1, 880);
-  
-  // How long the tone lasts
-  while (tone_timer < 60) {
-    if (call_adk) {
-      press_chirp_1();
-    }
-    delay(10);
-    call_adk = digitalRead(ADK);
-    tone_timer += 10;
-  }
-  
-  // Repeat interval
-  noTone(BUZZER1);
-  while (quiet_timer < 1000) {
-    if (call_adk) {
-      press_chirp_1();
-    }
-    delay(10);
-    call_adk = digitalRead(ADK);
-    quiet_timer += 10;
-  }
-  tone_timer = 0;
-  quiet_timer = 0;
-}
-
 void loop() {
+  if 
   ped_call = digitalRead(MAIN);
+  call_adk = digitalRead(ADK);
   if (ped_call) {
-    buzzer_phase_1();
+    loop_locator(BUZZER2);
+    chirp(BUZZER2);
   } else {
-    buzzer_phase_2();
+    loop_locator(BUZZER1);
+  }
+  if (call_adk && ped_call == true) {
+    chirp(BUZZER2);
+  } else if (call_adk && ped_call == false) {
+    chirp(BUZZER1);
   }
 }

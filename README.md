@@ -1,13 +1,17 @@
 # Semi-Realistic TinkerCAD Traffic Light Circuit
-A semi-realistic traffic light circuit was created in TinkerCAD with Arduinos and micro:bits. This repo contains the source code for the project and was created for the purpose of tracking scraps and projects for a hackathon.
+A semi-realistic traffic light circuit was created in TinkerCAD with Arduinos and micro:bits. This repo contains the source code for the project and was created for the purpose of tracking scraps and projects for a hackathon. 3D Model and circuit!
 
 **[Find the project here!](https://www.tinkercad.com/things/aTAbVHVReYn-realistic-ish-traffic-light?sharecode=yxpimFw48Sh7uL3CR5kw6gxLFxUi6zwyi1_lv7-vQRQ)**
 
 ![image](https://github.com/user-attachments/assets/25972859-0ec8-443e-aff1-8ed65eef2c12)
+![image](https://github.com/user-attachments/assets/476a21ba-f560-4ab8-8662-cf9eae6be145)
 
-**[Find the project here!](https://www.tinkercad.com/things/aTAbVHVReYn-realistic-ish-traffic-light?sharecode=yxpimFw48Sh7uL3CR5kw6gxLFxUi6zwyi1_lv7-vQRQ)**
+## The 3D Model:
 
-## Features:
+The 3D Model pictures 3 things. A traffic light, push-to-cross button, and crosswalk countdown meter thingy. I put a decent amount of attention to detail into it :D. The traffic light has a cover over the top, used in real life to block snow and rain. It also serves to block sunlight, making the colour of the bulb more visable. Same goes for the countdown thingy (still don't got a name for it :/). The push-to-cross button has a small LED, used in my city (Toronto, Canada) to show that the button worked and the traffic light will let you cross soon.
+
+
+## Features of circuit:
 - Fully functional traffic lights and phases
 - Pedestrian countdown timer and vehicle "detection"
 - Realistic** pedestrian locator tones and activation tone
@@ -15,7 +19,7 @@ A semi-realistic traffic light circuit was created in TinkerCAD with Arduinos an
 ** Depending on where you live it may sound different lol
 
 ## Why did I make this?
-This is a project for the summer hackathon Arcade. I chose to make this because, well, I'm a traffic nerd. It was an extremely fun ~~and painful to fix~~ project. I wanted to try out making circuits for basically the first time ever, and in the process realized fixing them is a huge pain. I also realized just how painfully hard it is to cater to people of all needs with accessibility features. That part alone took me a good nearly 2 hours.
+This is a project for the summer hackathon Arcade. I chose to make this because, well, I'm a traffic nerd. It was an extremely fun ~~and painful to fix~~ project. I wanted to try out making circuits for basically the first time ever, and in the process, I realized fixing them is a huge pain. I also realized just how painfully hard it is to cater to people of all needs with accessibility features. That part alone took me a good nearly 2 hours.
 
 ## Notes:
 - This is very, wait no, _EXTREMELY_ laggy, likely because there 2 micro:bits and 2 Arduinos lol

@@ -1,7 +1,9 @@
 # Semi-Realistic TinkerCAD Traffic Light Circuit
 A semi-realistic traffic light circuit was created in TinkerCAD with Arduinos and micro:bits. This repo contains the source code for the project and was created for the purpose of tracking scraps and projects for a hackathon. 3D Model and circuit!
 
-**[Find the project here!](https://www.tinkercad.com/things/aTAbVHVReYn-realistic-ish-traffic-light?sharecode=yxpimFw48Sh7uL3CR5kw6gxLFxUi6zwyi1_lv7-vQRQ)**
+**[Find the circuit here!](https://www.tinkercad.com/things/aTAbVHVReYn-realistic-ish-traffic-light?sharecode=yxpimFw48Sh7uL3CR5kw6gxLFxUi6zwyi1_lv7-vQRQ)**
+
+**[Find the 3D model here!](https://www.tinkercad.com/things/6DiVz8yVVSc-traffic-stuff-3d-model?sharecode=C2Wy4GF2sLLmCg5SKdNvRfndzHgiuC9FDbYgpzWna2w)**
 
 ![image](https://github.com/user-attachments/assets/25972859-0ec8-443e-aff1-8ed65eef2c12)
 ![image](https://github.com/user-attachments/assets/476a21ba-f560-4ab8-8662-cf9eae6be145)
@@ -30,4 +32,6 @@ This is a project for the summer hackathon Arcade. I chose to make this because,
 ## Note for the reviewers at Arcade!
 TinkerCAD provides a virtual code editor and simulator, for which there is no git function. I have uploaded screenshots and videos in my sessions as scraps. I've uploaded my updated code as I went as more scraps.
 
-Here's the link again in case, https://www.tinkercad.com/things/aTAbVHVReYn-realistic-ish-traffic-light?sharecode=yxpimFw48Sh7uL3CR5kw6gxLFxUi6zwyi1_lv7-vQRQ
+**[Find the circuit here!](https://www.tinkercad.com/things/aTAbVHVReYn-realistic-ish-traffic-light?sharecode=yxpimFw48Sh7uL3CR5kw6gxLFxUi6zwyi1_lv7-vQRQ)**
+
+**[Find the 3D model here!](https://www.tinkercad.com/things/6DiVz8yVVSc-traffic-stuff-3d-model?sharecode=C2Wy4GF2sLLmCg5SKdNvRfndzHgiuC9FDbYgpzWna2w)**
